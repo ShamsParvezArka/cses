@@ -1,49 +1,72 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdint.h>
+#include <limits.h>
+#include <math.h>
 
 #define LEN 1000000
 
-long int maximum(long int vector[4]) {
-	long int max = 1;
-	for (int i = 0; i < 4; i++) {
-		if (max < vector[i]) {
-			max = vector[i];
+int64_t vmax(int64_t vector2[], int64_t n) {
+	int64_t vmax = INT_MIN;
+	for (int64_t i = 0; i < n; i++) {
+		if (vmax < vector2[i]) {
+			vmax = vector2[i];
 		}
 	}
-	return max;
+	return vmax;
+}
+int64_t vmin(int64_t vector2[], int64_t n) {
+	int64_t vmin = INT_MAX;
+	for (int64_t i = 0; i < n; i++) {
+		if (vmin > vector2[i]) {
+			vmin = vector2[i];
+		}
+	}
+	return vmin;
+}
+int64_t vmin_non_zero(int64_t vector2[], int64_t n) {
+	int64_t vmin_non_zero = INT_MAX;
+	for (int64_t i = 0; i < n; i++) {
+		if (vmin_non_zero > vector2[i] && vector2[i] > 0) {
+			vmin_non_zero = vector2[i];
+		}
+	}
+	return vmin_non_zero;
+}
+int16_t *parse_vector2(int64_t n) {
+	int16_t *vector2 = (int16_t*) malloc(SHRT_MAX * sizeof(short));
+	int16_t length = (int16_t) floor(log10(n));
+	for (int i = 0; i < length; i++) {
+		vector2[length - i] = n % 2;
+		n = n / 10;
+	}
+	return vector2;
+}
+int64_t max(int64_t a, int64_t b) {
+	return (a > b)?a : b;
 }
 
 int main() {
-	char vector_ch[LEN];
-	long int index = 0;
+	char vector2[LEN];
 	char ch = getchar();
+	int64_t index = 0;
+	int64_t ans = 1;
+	int64_t count = 1;
 	while (ch != EOF) {
-		vector_ch[index] = ch;
-		index++;
+		vector2[index] = ch;
 		ch = getchar();
+		index++;
 	}
-
-	long int A = 1;
-	long int T = 1;
-	long int G = 1;
-	long int C = 1;
-
 	for (int i = 0; i < index - 1; i++) {
-		if (vector_ch[i] == 'A' && vector_ch[i] == vector_ch[i+1]) {
-			A++;
+		if (vector2[i] == vector2[i+1]) {
+			count++;	
+		} else {
+			count = 1;
 		}
-		else if (vector_ch[i] == 'T' && vector_ch[i] == vector_ch[i+1]) {
-			T++;
-		}
-		else if (vector_ch[i] == 'G' && vector_ch[i] == vector_ch[i+1]) {
-			G++;
-		}
-		else if (vector_ch[i] == 'C' && vector_ch[i] == vector_ch[i+1]) {
-			C++;
-		}
+		ans = max(ans, count);
 	}
-
-	long int vector[4] = {A, T, G, C};
-	printf("%ld", maximum(vector));
+	printf("%ld", ans);
 	return 0;
 }
