@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 #define maxN 4
 
@@ -22,17 +23,18 @@ int arr_to_num(int *arr, int N) {
 	for (int i = 0; i < N; i++) {
 		n = n*10 + arr[i];
 	}
-	return i;
+	return n;
 }
 
-
+void num_to_arr(int number, int *arr, int N) {
+	for (int i = N-1; i >= 0; i--) {
+		arr[i] = number % 10;
+		number = number / 10;
+	}
+}
 
 int main() {
-	int arr[maxN], arr_reverse[maxN];
-	for (int i = 0; i < maxN; i++) {
-		scanf("%d", &arr[i]);
-	}
-	selection_sort(arr, maxN);
+	int new_arr[maxN];
 	
 	return 0;
 }
