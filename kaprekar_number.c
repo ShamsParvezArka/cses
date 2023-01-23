@@ -34,7 +34,8 @@ void num_to_arr(int number, int *arr, int N) {
 }
 
 int main() {
-	int input = 3141;
+	int input;
+	scanf("%d", &input);
 	int arr[maxN], arr_reverse[maxN];
 	
 	int kaprekar_number = 6174;
@@ -50,8 +51,18 @@ int main() {
 		}
 		max = arr_to_num(arr_reverse, maxN);
 		checker = max - min;
-		count++;
+		if (checker == 0) {
+			printf("NOT POSSIBLE, ");
+			break;
+		} else {
+			count++;
+		}
 	}
-	printf("%d\n", count);
+	if (count == 0) {
+		printf("%lf\n", INFINITY);
+	} else {
+		printf("%d\n", count);
+	}
+	
 	return 0;
 }
