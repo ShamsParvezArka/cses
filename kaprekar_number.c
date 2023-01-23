@@ -34,7 +34,24 @@ void num_to_arr(int number, int *arr, int N) {
 }
 
 int main() {
-	int new_arr[maxN];
+	int input = 3141;
+	int arr[maxN], arr_reverse[maxN];
 	
+	int kaprekar_number = 6174;
+	int checker = input;
+	int max, min;
+	int count = 0;
+	while (checker != kaprekar_number) {
+		num_to_arr(checker, arr, maxN);
+		selection_sort(arr, maxN);
+		min = arr_to_num(arr, maxN);
+		for (int i = 0; i < maxN; i++) {
+			arr_reverse[maxN-i-1] = arr[i];
+		}
+		max = arr_to_num(arr_reverse, maxN);
+		checker = max - min;
+		count++;
+	}
+	printf("%d\n", count);
 	return 0;
 }
