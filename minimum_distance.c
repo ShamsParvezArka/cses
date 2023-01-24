@@ -10,23 +10,20 @@ int main() {
 		scanf("%d", &arr[i]);
 	}
 	
-	int key;
-	int tmp = 0;
-	int distance = 0;
+	int key, tmp;
+	int distance = INT_MAX;
 	for (int i = 0; i < N; i++) {
 		key = i;
 		for (int j = i+1; j < N; j++) {
 			if (arr[key] == arr[j]) {
 				tmp = abs(key - j);
-				break;
+				if (distance > tmp) distance = tmp;
 			}
 		}
-		if (distance > tmp) distance = tmp;
 	}
-	if (distance == 0) {
+	if (distance == 0 || distance == INT_MAX) {
 		printf("-1\n");
-	} else {
-		printf("%d\n", distance);
-	}
+	} else printf("%d\n", distance);
+	
 	return 0;
 }
