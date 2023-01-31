@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define maxN 30
+#define maxN 100000
 
 int main() {
   int arr[maxN+1];
@@ -10,7 +10,7 @@ int main() {
 
   for (int i = 2; i <= (int) sqrt(maxN); i++) {
     for (int j = 2; j <= maxN / i; j++) {
-			arr[i*j] = 0;
+			if (arr[j]) arr[i*j] = 0;
     }
   }
 
