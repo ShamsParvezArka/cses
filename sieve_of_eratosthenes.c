@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdbool.h>
 
-#define maxN 100000
+#define maxN 30
 
 int main() {
   int arr[maxN+1];
-	arr[1] = 1;
-  for (int i = 2; i <= maxN; i++) arr[i] = 1;
+	for (int i = 1; i <= maxN; i++) arr[i] = true;
 
   for (int i = 2; i <= (int) sqrt(maxN); i++) {
     for (int j = 2; j <= maxN / i; j++) {
-			if (arr[j]) arr[i*j] = 0;
+			if (arr[j]) arr[i*j] = false;
     }
   }
 
