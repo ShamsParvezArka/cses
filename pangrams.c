@@ -1,37 +1,23 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+#include <ctype.h>
 
+int main() 
+{
+	char query[] = {"abcdefghijklmnopqrstuvwxyz"};
+	char message[100];
+	scanf("%[^\n]%*c", message);
 
-int main() {
-	int maxN = 1000;
-	char str[maxN];
-	fgets(str, maxN, stdin);
-	str[0] = (int) str[0] + 32;
-	char key;
-	for (int i = 0; i < maxN; i++) {
-		key = str[i];
-		for (int j = i+1; j < maxN; j++) {
-			if (key == str[j]) {
-				for (int k = j; k < maxN; k++) {
-					str[k] = str[k+1];
-				}
-				j--;
-				maxN--;
-			}
+	message[0] = tolower(message[0]);
+	for (size_t i = 0; i < strlen(query); i++) {
+		char search = query[i];
+		if (!memchr(message, search, strlen(message))) {
+			printf("not pangram\n");
+			return 0;
 		}
 	}
-	
-	int index = 0;
-	int count = 0;
-	while (str[index] != '\n') {
-		if (str[index] != ' ') {
-			count++;
-		}
-		index++;
-	}
-	if (count == 26) {
-		printf("pangram");
-	} else {
-		printf("not pangram");
-	}
+
+	printf("pangram\n");
+	return 0;
 }
