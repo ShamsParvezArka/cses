@@ -1,3 +1,9 @@
+/*
+ * Codeforces Codeforces Round 860(Div.2)
+ * Problem A: Showstopper
+ * Link: https://codeforces.com/contest/1798/problem/A
+ */
+
 #include <iostream>
 #include <algorithm>
 #include <string>
