@@ -5,7 +5,7 @@
 #include <string>
 #include <cstdbool>
 
-std::vector<int> itovector(int n) {
+std::vector<int> itovec(int n) {
 	std::vector<int> vec;
 	int number_length = floor(log10(n)) + 1;
 	for (int i = 0; i < number_length; i++) {
@@ -15,7 +15,7 @@ std::vector<int> itovector(int n) {
 	return vec;
 }
 
-int vectortoi(std::vector<int> vec) {
+int vectoi(std::vector<int> vec) {
 	std::string str;
 	for (size_t i = 0; i < vec.size(); i++) {
 		str += std::to_string(vec[i]);
@@ -31,13 +31,13 @@ int main()
 	int counter = 0;
 
 	while (true) {
-		std::vector<int> minV = itovector(x);
+		std::vector<int> minV = itovec(x);
 		std::sort(minV.begin(), minV.end());
-		int min = vectortoi(minV);
+		int min = vectoi(minV);
 
 		std::vector<int> maxV = minV;
 		std::reverse(maxV.begin(), maxV.end());
-		int max = vectortoi(maxV);
+		int max = vectoi(maxV);
 		
 		if (max - min == kap) {
 			std::cout << counter << std::endl;
