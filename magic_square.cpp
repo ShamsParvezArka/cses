@@ -1,7 +1,7 @@
 /*
- * matrix: Templatised matrix operation functions (i.e. refl, rot90, flat)
- * Author: Shams Parvez Arka <parvez6826@gmail.com>
- */
+* matrix: Templatised matrix operation functions (i.e. refl, rot90, flat)
+* Author: Shams Parvez Arka <parvez6826@gmail.com>
+*/
 
 #include <iostream>
 #include <algorithm>
@@ -9,7 +9,8 @@
 #include <numeric>
 #include <vector>
 
-template<typename T> std::vector<std::vector<int>> refl(std::vector<std::vector<T>> &vec2D) {
+template<typename T> 
+std::vector<std::vector<T>> refl(std::vector<std::vector<T>> &vec2D) {
 	std::vector<std::vector<T>> vec(3);
 	for (size_t i = 0; i < vec2D.size(); i++) {
 		for (size_t j = 0; j < vec2D[i].size(); j++)
@@ -20,7 +21,8 @@ template<typename T> std::vector<std::vector<int>> refl(std::vector<std::vector<
 	return vec2D;
 }
 
-template<typename T> std::vector<std::vector<int>> rot90(std::vector<std::vector<T>> &vec2D) {
+template<typename T> 
+std::vector<std::vector<T>> rot90(std::vector<std::vector<T>> &vec2D) {
 	refl<int> (vec2D);
 	for (size_t i = 0; i < vec2D.size(); i++) {
 		std::reverse(vec2D[i].begin(), vec2D[i].end());
@@ -28,7 +30,8 @@ template<typename T> std::vector<std::vector<int>> rot90(std::vector<std::vector
 	return vec2D;
 }
 
-template<typename T> std::vector<T> flat(std::vector<std::vector<T>> vec2D) {
+template<typename T> 
+std::vector<T> flat(std::vector<std::vector<T>> vec2D) {
 	std::vector<T> vec;
 	for (auto row: vec2D) {
 		for (auto col: row)
