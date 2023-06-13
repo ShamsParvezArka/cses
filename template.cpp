@@ -50,19 +50,19 @@ std::vector<T> flat(std::vector<std::vector<T>> vec2D) {
 	return vec;
 }
 
-
-int main()
+std::vector<std::string> split(std::string& raw, std::string delimiter)
 {
-	std::vector<int> vec {1, 2, 3, 4, 5};
-	auto dash_fold = [](std::string a, int b) {
-		return std::move(a) + '-' + std::to_string(b);
-	};
-	std::string output = std::accumulate(std::next(vec.begin()),
-										 vec.end(), 
-										 std::to_string(vec[0]), 
-										 dash_fold);
-	std::cout << output << '\n';
+	std::vector<std::string> vec {};
 
-	return 0;
+	std::string token;
+	size_t pos = 0;
+
+	while ((pos = raw.find(delimiter)) != std::string::npos) {
+		token = raw.substr(0, pos);
+		vec.push_back(token);
+		raw.erase(0, pos + delimiter.length());
+	}
+	vec.push_back(raw);
+
+	return vec;
 }
-
