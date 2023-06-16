@@ -1,11 +1,12 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <array>
 
 enum class Move {
-	rock     = 1,
-	paper    = 2,
-	scissors = 3,
+	rock     = 0,
+	paper    = 1,
+	scissors = 2,
 };
 
 namespace game {
@@ -27,19 +28,19 @@ int main() {
 	std::fstream file;
 	file.open(fname, std::ios::in);
 
+	std::array<std::array<int, 3>, 3> score_map = {{
+		{4, 1, 7},
+		{8, 5, 2},
+		{3, 9, 6}
+	}};
+
 	size_t score {};
 	std::string line {};
 	if (file.is_open() == true) {
 		while (std::getline(file, line)) {
 			int opponent = static_cast<int>(game::filter(line[0]));
 			int mine     = static_cast<int>(game::filter(line[2]));
-
-			if (mine > opponent)
-				score += (6 + mine);
-			if (mine < opponent)
-				score += (0 + mine);
-			if (mine == opponent)
-				score += (3 + mine);
+			score += score_map.at(opponent).at(mine);
 		}
 	}
 	file.close();
@@ -48,3 +49,4 @@ int main() {
 
 	return 0;
 }
+
